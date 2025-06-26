@@ -1,0 +1,6 @@
+venv/
+*.txt
+!challenges.txt
+*.xlsx
+*.html
+sub.py
