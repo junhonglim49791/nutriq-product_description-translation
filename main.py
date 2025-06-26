@@ -24,7 +24,6 @@ df = pd.read_excel("basic300734464062export1750487488629_0621-14-31-28.xlsx", he
 start_time = time.time()
 
 translated_html_string_list = []
-original_text = []
 for i in range(0,  df.shape[0]):
 
     # Skip empty rows
