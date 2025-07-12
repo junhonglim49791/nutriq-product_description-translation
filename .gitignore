@@ -1,6 +1,6 @@
 venv/
 *.txt
-!challenges.txt
+!requirements.txt
 *.xlsx
 *.html
 sub.py
