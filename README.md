@@ -110,9 +110,9 @@ At that time, this issue was time-sensitive due to short notice that requires ec
    python3 main.py
    ```
 6. **Output:**  
-After processing, a new Excel file will be generated that preserves the original structure. The existing `Main Description` column will be updated with the translated content.
+After processing, `malay_description.xlsx` will be generated that preserves the original structure. The existing `Main Description` column will be updated with the translated content.
 
-## 🛒 How to Update Product Description in Lazada
+## 🛒 How to Update Product Descriptionin Lazada
 
 1. **Download the Excel file** for your current product listings using **Bulk Edit**.  
    *(This is very important because we are overwriting the `English Decription Field` with the translations)*
