@@ -4,3 +4,4 @@ venv/
 *.xlsx
 *.html
 sub.py
+*.Identifier

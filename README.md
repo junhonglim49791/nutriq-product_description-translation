@@ -1,5 +1,5 @@
 # <img src="lazada-removebg-preview-crop-bottom-removebg-preview.png" width="50"> **Lazada Product Description Translation**
-A Python script to translate long, HTML-formatted product descriptions from English to Malay using **`py-googletrans`**.
+A Python script to translate long, HTML-formatted product descriptions from English to Malay using **`py-googletrans`** and **`BeautifulSoup`**.
 
 ## 🎯 Purpose
 
@@ -7,65 +7,72 @@ This script was created to address the challenge of translating long, HTML-forma
 
 Initially, I attempted to use Google Sheets' built-in `GOOGLETRANSLATE` function, but it also translated HTML tags — breaking the formatting and structure. I then tried writing a custom Google Apps Script to isolate and translate only the text, but handling nested `<span>` tags required parsing the HTML into XML. End up spending extra time dealing with unexpected formatting issues. 
 
-At that time, this issue was time-sensitive due to short notice that requires ecommerce stores to include Bahasa Malaysia in their product listings. To solve this properly, I switched to Python, where libraries like **`BeautifulSoup`** make it easy to extract and replace text nodes without touching the HTML structure. 
+At that time, this issue was time-sensitive due to short notice that requires ecommerce stores to include Bahasa Malaysia in their product listings. To solve this properly, I switched to Python because its easiert to extract and replace text nodes without touching the HTML structure. 
 
 ## 📌 Example
 
 ### Input:
 ```html
-<p
-  style="
-    line-height: 1.7;
-    text-align: left;
-    text-indent: 0;
-    margin-left: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-  "
->
-  <span style="color: rgb(102, 102, 102); font-size: 18pt"
-    >ActivMax Keto 3:1 is formulated specially to manage nutritional issues in
-    ketogenic practices, which includes minimizing glucose crashes, nutrient
-    deficiency and diarrhoea. ActivMax Keto 3:1 is a complete nutritional
-    drink with vitamins, minerals, DHA, ALA, Omega-9, and calcium to promote
-    healthy growth and development of children. With an advanced blend of
-    healthy fats with medium-chain triglycerides (MCT) and long-chain fatty
-    acids (LCFA), ActivMax Keto 3:1 provides both fast and slow release of
-    ketone energy suitable for children. Moreover, it is lactose-free, high in
-    soluble fiber and high-quality plant-based soy-isolated protein to
-    minimize the risk of diarrhoea events throughout their ketogenic journey,
-    providing maximum gut comfort.</span
+  <p
+    style="
+      line-height: 1.7;
+      text-align: left;
+      text-indent: 0;
+      margin-left: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+    "
   >
-</p>
+    <span
+      style="
+        font-weight: bold;
+        text-decoration: underline;
+        color: rgb(85, 85, 85);
+        font-size: 18pt;
+      "
+      >ACTIVMAX Keto 3:1</span
+    ><span style="color: rgb(102, 102, 102); font-size: 18pt"
+      > is a nutritionally complete, ketogenic formula in a 3:1 ratio (fat:
+      carbohydrate + protein) for the dietary management of intractable epilepsy
+      and other medical conditions where the ketogenic diet is indicated;
+      designed for infants and children. This formula is high in healthy fats
+      and low in carbohydrates to optimize ketone bodies while providing a
+      complete nutritional support for the growth and development of
+      children.</span
+    >
+  </p>
 
 ```
 ### Output:
 ```html
-<p
-  style="
-    line-height: 1.7;
-    text-align: left;
-    text-indent: 0;
-    margin-left: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-  "
->
-  <span style="color: rgb(102, 102, 102); font-size: 18pt"
-    >Activmax Keto 3: 1 dirumuskan khas untuk menguruskan isu pemakanan dalam
-    amalan ketogenik, yang termasuk meminimumkan kemalangan glukosa,
-    Kekurangan nutrien dan cirit -birit. Activmax Keto 3: 1 adalah minuman
-    pemakanan lengkap dengan vitamin, mineral, DHA, Ala, Omega-9, dan kalsium
-    untuk menggalakkan pertumbuhan dan perkembangan kanak -kanak yang sihat.
-    Dengan campuran lemak yang sihat dengan trigliserida rantaian sederhana
-    (MCT) dan asid lemak rantaian panjang (LCFA), Activmax Keto 3: 1
-    menyediakan pelepasan tenaga keton yang cepat dan perlahan yang sesuai
-    untuk kanak -kanak. Selain itu, Ia bebas laktosa, Tinggi serat larut dan
-    protein berasaskan soya berasaskan loji yang berkualiti tinggi untuk
-    meminimumkan risiko peristiwa cirit-birit sepanjang perjalanan ketogenik
-    mereka, menyediakan keselesaan usus maksimum.</span
+  <p
+    style="
+      line-height: 1.7;
+      text-align: left;
+      text-indent: 0;
+      margin-left: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+    "
   >
-</p>
+    <span
+      style="
+        font-weight: bold;
+        text-decoration: underline;
+        color: rgb(85, 85, 85);
+        font-size: 18pt;
+      "
+      >Activmax Keto 3:1</span
+    ><span style="color: rgb(102, 102, 102); font-size: 18pt"
+      > adalah formula ketogenik yang lengkap dan nutrisi dalam nisbah 3:1
+      (lemak:karbohidrat + protein) untuk pengurusan pemakanan epilepsi yang
+      tidak dapat dikesan dan keadaan perubatan lain di mana diet ketogenik
+      ditunjukkan; Direka untuk bayi dan kanak-kanak. Formula ini tinggi dalam
+      lemak yang sihat dan rendah karbohidrat untuk mengoptimumkan badan keton
+      sambil memberikan sokongan pemakanan yang lengkap untuk pertumbuhan dan
+      perkembangan kanak-kanak.</span
+    >
+  </p>
 
 ```
 ## 🛠 Requirements
@@ -96,18 +103,31 @@ At that time, this issue was time-sensitive due to short notice that requires ec
     pip install -r requirements.txt
     ```
 4. **Prepare your input Excel file:**  
-  The script expects an excel file containing Lazada product data. There should be a column named **`Main Description`** which contains HTML-formatted product descriptions in English.
+  Assign the variable `original_file_name` with the name of your excel file
 
 5. **Run the script:**
    ```bash
    python3 main.py
    ```
-6. **Output:**
+6. **Output:**  
+After processing, a new Excel file will be generated that preserves the original structure. The existing `Main Description` column will be updated with the translated content.
 
-   After processing, a new Excel file will be generated. It will contain two columns:
+## 🛒 How to Update Product Description in Lazada
 
-   - **Main Description** – the original English HTML-formatted content
-   - **Translated Description** – the Malay-translated version with HTML structure preserved
+1. **Download the Excel file** for your current product listings using **Bulk Edit**.  
+   *(This is very important because we are overwriting the `English Decription Field` with the translations)*
+
+    > **_Note:_** *This process is troublesome because Lazada does not provide a designated column for Malay descriptions in the Excel file — only on the web edit page.*
+
+
+2. **Upload the translated Excel file** that includes the Malay descriptions using **Bulk Edit**.
+
+3. In Lazada Seller Center, go to **Edit Product** (*yes, for each product*), then **copy and paste** the **translated Malay descriptions** from the `English Description Field` into the `Malay Description Field`.
+
+4. Finally, **reupload your previously downloaded Excel file** that still contains the **original English descriptions** to overwrite them back in `English Description Field`.
+
+5. Once completed, your product will have descriptions in both English and Malay. Customers will see the appropriate language version when they switch languages on Lazada.
+
 
 ## 📝 Translation Notes
 
@@ -123,9 +143,6 @@ At that time, this issue was time-sensitive due to short notice that requires ec
 
 - **Limitations:**  
   The script uses the unofficial `googletrans` library, which depends on Google Translate’s web API. Therefore, this will not work at all times or could be blocked at anytime.
-
-- **Extra space in kata ganda (Not solve) :**  
-  Translations of duplicated words (e.g., *kanak-kanak*) may include an unwanted space before the hyphen (*kanak -kanak*).
 
 - **Missing space after bold text (Not solve):**  
    When bold formatting ends and is followed by a regular word, the space may be lost.
@@ -143,9 +160,9 @@ The translation quality from `googletrans` is **not as accurate** as the officia
 
 | Source        | Translated Output |
 |---------------|-------------------|
-| `googletrans` | Rawan adalah tisu penghubung yang meliputi hujung tulang anda untuk **membentuk permukaan yang menghilangkan dan menyerap yang licin** untuk sendi anda. |
-| Google Web    | Rawan adalah tisu penghubung yang menutupi hujung tulang anda untuk **membentuk permukaan licin, menyerap kejutan untuk sendi anda.** |
-| ChatGPT       | Rawan ialah tisu penghubung yang menutupi hujung tulang anda untuk **membentuk permukaan yang licin dan menyerap hentakan** bagi sendi-sendi anda. |
+| `googletrans` | Rawan adalah tisu penghubung yang meliputi hujung tulang anda untuk **_membentuk permukaan yang menghilangkan dan menyerap yang licin_** untuk sendi anda. |
+| Google Web    | Rawan adalah tisu penghubung yang menutupi hujung tulang anda untuk **_membentuk permukaan licin, menyerap kejutan untuk sendi anda._** |
+| ChatGPT       | Rawan ialah tisu penghubung yang menutupi hujung tulang anda untuk **_membentuk permukaan yang licin dan menyerap hentakan_** bagi sendi-sendi anda. |
 
 ---
 
@@ -155,9 +172,9 @@ The translation quality from `googletrans` is **not as accurate** as the officia
 
 | Source        | Translated Output |
 |---------------|-------------------|
-| `googletrans` | Memilih kalsium yang betul adalah **kalsium penting dan elemen adalah kunci** kerana ia adalah jumlah sebenar kalsium badan anda menyerap untuk pertumbuhan tulang dan manfaat kesihatan yang lain. |
-| Google Web    | Memilih kalsium yang betul adalah **penting dan unsur kalsium adalah kunci** kerana ia adalah jumlah sebenar kalsium yang diserap oleh badan anda untuk pertumbuhan tulang dan manfaat kesihatan yang lain. |
-| ChatGPT       | Memilih kalsium yang tepat **adalah penting, dan kalsium elemental merupakan kunci** kerana ia adalah jumlah sebenar kalsium yang diserap oleh tubuh anda untuk pertumbuhan tulang dan manfaat kesihatan yang lain. |
+| `googletrans` | Memilih kalsium yang betul **adalah _kalsium penting dan elemen adalah kunci_** kerana ia adalah jumlah sebenar kalsium badan anda menyerap untuk pertumbuhan tulang dan manfaat kesihatan yang lain. |
+| Google Web    | Memilih kalsium yang betul **adalah _penting dan unsur kalsium adalah kunci_** kerana ia adalah jumlah sebenar kalsium yang diserap oleh badan anda untuk pertumbuhan tulang dan manfaat kesihatan yang lain. |
+| ChatGPT       | Memilih kalsium yang tepat **_adalah penting, dan kalsium elemental merupakan kunci_** kerana ia adalah jumlah sebenar kalsium yang diserap oleh tubuh anda untuk pertumbuhan tulang dan manfaat kesihatan yang lain. |
 
 ---
 
