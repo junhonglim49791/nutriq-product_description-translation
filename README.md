@@ -103,7 +103,7 @@ At that time, this issue was time-sensitive due to short notice that requires ec
     pip install -r requirements.txt
     ```
 4. **Prepare your input Excel file:**  
-  Assign the variable `original_file_name` with the name of your excel file
+  Put your excel file in the same directory with `main.py`. Assign the variable `original_file_name` with the name of your excel file.
 
 5. **Run the script:**
    ```bash
