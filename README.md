@@ -120,7 +120,7 @@ After processing, `malay_description.xlsx` will be generated that preserves the 
     > **_Note:_** *This process is troublesome because Lazada does not provide a designated column for Malay descriptions in the Excel file — only on the web edit page.*
 
 
-2. **Upload the translated Excel file** that includes the Malay descriptions using **Bulk Edit**.
+2. **Upload the translated Excel file** `malay_description.xlsx` that includes the Malay descriptions using **Bulk Edit**.
 
 3. In Lazada Seller Center, go to **Edit Product** (*yes, for each product*), then **copy and paste** the **translated Malay descriptions** from the `English Description Field` into the `Malay Description Field`.
 
